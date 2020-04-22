@@ -1,8 +1,8 @@
-from fpdf import FPDF
-from PIL import Image
+import argparse
 from pathlib import Path
 
-import argparse
+from fpdf import FPDF
+from PIL import Image
 
 
 def make_pdf(img_dir_path, output_filename=None):
@@ -26,7 +26,8 @@ def make_pdf(img_dir_path, output_filename=None):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(
-        description="A CLI tool to convert a folder of images into a pdf doc.")
+        description="A CLI tool to convert a folder of images into a pdf doc."
+    )
 
     ap.add_argument(
         "-d", "--dir", required=True, help="Path to search for filenames.",
