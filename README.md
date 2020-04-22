@@ -1,4 +1,6 @@
-# Python-Template
+# Image-to-PDF
+
+Convert a folder of images into a PDF document.
 
 ## Support
 
