@@ -35,32 +35,8 @@ pipeline {
                 echo "Style check"
                 sh  ''' source /var/lib/jenkins/miniconda3/etc/profile.d/conda.sh
                         conda activate ${BUILD_TAG}
-                        pylint CHANGE_ME || true
+                        pylint img-to-pdf.py || true
                     '''
-            }
-        }
-
-        stage('Build package') {
-            when {
-                expression {
-                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
-                }
-            }
-            steps {
-                sh  ''' source /var/lib/jenkins/miniconda3/etc/profile.d/conda.sh
-                        conda activate ${BUILD_TAG}
-                        pwd
-                        ls
-                        python setup.py bdist_wheel
-                    '''
-            }
-            post {
-                always {
-                    // Archive unit tests for the future
-                    archiveArtifacts (allowEmptyArchive: true,
-                                     artifacts: 'dist/*whl',
-                                     fingerprint: true)
-                }
             }
         }
     }
